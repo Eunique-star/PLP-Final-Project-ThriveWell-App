@@ -44,7 +44,6 @@ app.get('/', (req, res) => {
 });
 
 // --- Use Routes ---
-// This part was correct
 app.use('/api/webhooks', webhookRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/articles', articleRoutes);

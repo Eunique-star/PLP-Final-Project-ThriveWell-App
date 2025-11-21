@@ -1,7 +1,7 @@
-import { SignUp } from "@clerk/clerk-react";
+import { SignIn } from "@clerk/clerk-react";
 import { motion } from "framer-motion";
 
-const SignUpPage = () => {
+const SignInPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -11,15 +11,15 @@ const SignUpPage = () => {
       >
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Join ThriveWell
+            Welcome Back!
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Create your account and start your health journey
+            Sign in to access your health companion
           </p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-          <SignUp
+          <SignIn
             appearance={{
               elements: {
                 formButtonPrimary:
@@ -35,14 +35,14 @@ const SignUpPage = () => {
               },
             }}
             routing="path"
-            path="/sign-up"
-            signInUrl="/sign-in"
-            afterSignUpUrl="/"
+            path="/sign-in"
+            signUpUrl="/sign-up"
+            afterSignInUrl="/"
           />
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-          By signing up, you agree to our{" "}
+          By signing in, you agree to our{" "}
           <a href="/terms" className="text-primary-500 hover:text-primary-600">
             Terms of Service
           </a>{" "}
@@ -59,4 +59,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
