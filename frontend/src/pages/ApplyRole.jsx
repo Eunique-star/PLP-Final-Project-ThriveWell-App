@@ -100,7 +100,7 @@ const ApplyRole = () => {
 
     try {
       const applicationData = {
-        role: selectedRole,
+        roleAppliedFor: selectedRole,
         ...formData,
       };
 
