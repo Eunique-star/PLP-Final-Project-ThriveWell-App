@@ -10,17 +10,51 @@ const api = axios.create({
   },
 });
 
-// Add auth token to requests - THIS IS IMPORTANT!
-let authToken = null;
+// Add request interceptor to log all requests
+api.interceptors.request.use(
+  (config) => {
+    console.log('📤 API Request:', {
+      method: config.method,
+      url: config.url,
+      baseURL: config.baseURL,
+      hasAuth: !!config.headers.Authorization
+    });
+    return config;
+  },
+  (error) => {
+    console.error('Request error:', error);
+    return Promise.reject(error);
+  }
+);
 
+// Add response interceptor to log errors
+api.interceptors.response.use(
+  (response) => {
+    console.log('📥 API Response:', response.status, response.config.url);
+    return response;
+  },
+  (error) => {
+    console.error('📥 API Error:', {
+      status: error.response?.status,
+      url: error.config?.url,
+      message: error.response?.data?.message,
+      data: error.response?.data
+    });
+    return Promise.reject(error);
+  }
+);
+
+// Set auth token
 export const setAuthToken = (token) => {
-  authToken = token;
+  console.log('🔑 Setting auth token:', token ? 'Token set' : 'Token cleared');
+  
   if (token) {
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   } else {
     delete api.defaults.headers.common['Authorization'];
   }
 };
+
 
 // Categories
 export const getCategories = () => api.get('/api/categories');

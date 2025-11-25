@@ -21,10 +21,23 @@ function AuthTokenHandler() {
 
   useEffect(() => {
     const updateToken = async () => {
+      console.log("🔐 Auth state:", { isSignedIn });
+
       if (isSignedIn) {
-        const token = await getToken();
-        setAuthToken(token);
+        try {
+          const token = await getToken();
+          console.log(
+            "✅ Token retrieved:",
+            token ? "Token exists" : "No token"
+          );
+          console.log("Token preview:", token?.substring(0, 20) + "...");
+          setAuthToken(token);
+        } catch (error) {
+          console.error("❌ Error getting token:", error);
+          setAuthToken(null);
+        }
       } else {
+        console.log("⚠️ User not signed in, clearing token");
         setAuthToken(null);
       }
     };
