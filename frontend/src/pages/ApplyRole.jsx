@@ -99,19 +99,28 @@ const ApplyRole = () => {
     setError(null);
 
     try {
+      // Map frontend fields to backend expected fields
       const applicationData = {
         roleAppliedFor: selectedRole,
-        ...formData,
+        bio: `${formData.motivation}\n\nCredentials: ${formData.credentials}\n\nExperience: ${formData.experience}`,
+        specialty:
+          selectedRole === "medical" ? formData.specialization : undefined,
       };
 
-      await submitApplication(applicationData);
+      console.log("📋 Application data being sent:", applicationData);
+
+      const response = await submitApplication(applicationData);
+
+      console.log("✅ Success response:", response);
       setSuccess(true);
     } catch (err) {
+      console.error("❌ Error submitting application:", err);
+      console.error("Error response:", err.response);
+
       setError(
         err.response?.data?.message ||
           "Failed to submit application. Please try again."
       );
-      console.error("Error submitting application:", err);
     } finally {
       setLoading(false);
     }
