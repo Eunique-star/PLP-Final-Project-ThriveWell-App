@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import { motion } from "framer-motion";
-import axios from "axios";
+import { getMedicalProfessionals as fetchMedicalProfessionals } from "../services/api";
 import {
   Stethoscope,
   Calendar,
@@ -45,10 +45,7 @@ const BookProfessional = () => {
   const fetchProfessionals = async () => {
     try {
       setLoading(true);
-      // Fetch all users with 'medical' role
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/users/medical-professionals`
-      );
+      const response = await fetchMedicalProfessionals();
       setProfessionals(response.data);
       setError(null);
     } catch (err) {

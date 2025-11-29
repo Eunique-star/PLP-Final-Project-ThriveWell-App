@@ -55,6 +55,8 @@ export const setAuthToken = (token) => {
   }
 };
 
+// Users
+export const getMedicalProfessionals = () => api.get('/api/users/medical-professionals');
 
 // Categories
 export const getCategories = () => api.get('/api/categories');

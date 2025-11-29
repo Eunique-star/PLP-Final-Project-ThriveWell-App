@@ -14,6 +14,7 @@ import SignUpPage from "./pages/SignUp";
 import ApplyRole from "./pages/ApplyRole";
 import AIChat from "./pages/AIChat";
 import BookProfessional from "./pages/BookProfessional";
+import BookAppointment from "./pages/BookAppointment";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -71,6 +72,10 @@ function App() {
                 <Route
                   path="/book-professional"
                   element={<BookProfessional />}
+                />
+                <Route
+                  path="/book-appointment/:clerkId"
+                  element={<BookAppointment />}
                 />
               </Routes>
             </main>
